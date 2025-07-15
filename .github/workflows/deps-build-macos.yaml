@@ -80,8 +80,10 @@ jobs:
 
       - name: Pnpm install
         shell: bash
+        env:
+          NODE_OPTIONS: '--max_old_space_size=8192'
         run: |
-          pnpm i
+          pnpm i --frozen-lockfile --prefer-offline
       - name: Download Sidecars aarch64
         if: ${{ inputs.aarch64 == true }}
         run: pnpm check --arch arm64 --sidecar-host aarch64-apple-darwin
